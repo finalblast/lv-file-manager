@@ -72,8 +72,8 @@ export default {
       // search in selected array
       const alreadySelected = this.selected[type].includes(path);
 
-      // if pressed Ctrl -> multi select
-      if (event.ctrlKey && this.selectionType === 'multiple') {
+      // if multi select
+      if (this.selectionType === 'multiple') {
         if (!alreadySelected) {
           // add new selected item
           this.$store.commit(`fm/${this.manager}/setSelected`, { type, path });
@@ -81,10 +81,9 @@ export default {
           // remove selected item
           this.$store.commit(`fm/${this.manager}/removeSelected`, { type, path });
         }
+      } else if (!alreadySelected) {
+        this.$store.commit(`fm/${this.manager}/changeSelected`, { type, path });
       }
-
-      // single select
-      if (!event.ctrlKey && !alreadySelected) this.$store.commit(`fm/${this.manager}/changeSelected`, { type, path });
     },
 
     /**
