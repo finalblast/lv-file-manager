@@ -94,16 +94,18 @@ export default {
     contextMenu(item, event) {
       // el type
       const type = item.type === 'dir' ? 'directories' : 'files';
+      const path = item.path;
       // search in selected array
-      const alreadySelected = this.selected[type].includes(item.path);
+      const alreadySelected = this.selected[type].includes(path);
 
-      // select this element
-      if (!alreadySelected) {
-        // select item
-        this.$store.commit(`fm/${this.manager}/changeSelected`, {
-          type,
-          path: item.path,
-        });
+      // if multi select
+      if (this.selectionType === 'multiple') {
+        if (!alreadySelected) {
+          // add new selected item
+          this.$store.commit(`fm/${this.manager}/setSelected`, { type, path });
+        }
+      } else if (!alreadySelected) {
+        this.$store.commit(`fm/${this.manager}/changeSelected`, { type, path });
       }
 
       // create event

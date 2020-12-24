@@ -1,79 +1,56 @@
 <template>
-    <div class="fm-context-menu"
-         tabindex="-1"
-         ref="contextMenu"
-         v-if="menuVisible"
-         v-bind:style="menuStyle"
-         v-on:blur="closeMenu">
-        <ul class="list-unstyled">
-            <li class="disabled" v-if="showMenuItem('info')">
-                {{ `${lang.contextMenu.info} ${selectedItems.length}` }}
-            </li>
-            <li v-if="showMenuItem('open')"
-                v-on:click="menuAction('open')">
-                <i class="far fa-fw fa-folder-open"></i>
-                {{ lang.contextMenu.open }}
-            </li>
-            <li v-if="showMenuItem('view')"
-                v-on:click="menuAction('view')">
-                <i class="fas fa-fw fa-eye"></i>
-                {{ lang.contextMenu.view }}
-            </li>
-            <li v-if="showMenuItem('insert')"
-                v-on:click="menuAction('insert');">
-                <i class="fas fa-fw fa-check"></i>
-                {{ lang.contextMenu.insert }}
-            </li>
-            <li v-if="showMenuItem('select')"
-                v-on:click="menuAction('select')">
-                <i class="fas fa-fw fa-check"></i>
-                {{ lang.contextMenu.select }}
-            </li>
-            <li v-if="showMenuItem('download')"
-                v-on:click="menuAction('download')">
-                <i class="fas fa-fw fa-download"></i>
-                {{ lang.contextMenu.download }}
-            </li>
-        </ul>
-        <ul class="list-unstyled">
-          <template v-if="!props || (props && props.delete !== false)">
-            <li v-on:click="menuAction('copy')">
-                <i class="far fa-fw fa-copy"></i>
-                {{ lang.contextMenu.copy }}
-            </li>
-          </template>
-          <template v-if="!props || (props && props.upload !== false)">
-            <li v-on:click="menuAction('cut')">
-                <i class="fas fa-fw fa-cut"></i>
-                {{ lang.contextMenu.cut }}
-            </li>
-            <li v-if="showMenuItem('rename')"
-                v-on:click="menuAction('rename')">
-                <i class="far fa-fw fa-edit"></i>
-                {{ lang.contextMenu.rename }}
-            </li>
-            <li v-if="showMenuItem('paste')"
-                v-on:click="menuAction('paste')">
-                <i class="far fa-fw fa-clipboard"></i>
-                {{ lang.contextMenu.paste }}
-            </li>
-          </template>
-        </ul>
-        <template v-if="!props || (props && props.delete !== false)">
-          <ul class="list-unstyled">
-              <li class="text-danger" v-on:click="menuAction('delete')">
-                  <i class="far fa-fw fa-trash-alt"></i>
-                  {{ lang.contextMenu.delete }}
-              </li>
-          </ul>
-        </template>
-        <ul class="list-unstyled" v-if="showMenuItem('properties')">
-            <li v-on:click="menuAction('properties')">
-                <i class="far fa-fw fa-list-alt"></i>
-                {{ lang.contextMenu.properties }}
-            </li>
-        </ul>
-    </div>
+  <div class="fm-context-menu" tabindex="-1" ref="contextMenu" v-if="menuVisible" v-bind:style="menuStyle" v-on:blur="closeMenu">
+    <ul class="list-unstyled">
+      <li class="disabled" v-if="showMenuItem('info')">
+        {{ `${lang.contextMenu.info} ${selectedItems.length}` }}
+      </li>
+      <li v-if="showMenuItem('open')" v-on:click="menuAction('open')">
+        <i class="far fa-fw fa-folder-open"></i> {{ lang.contextMenu.open }}
+      </li>
+      <li v-if="showMenuItem('view')" v-on:click="menuAction('view')">
+        <i class="fas fa-fw fa-eye"></i> {{ lang.contextMenu.view }}
+      </li>
+      <li v-if="showMenuItem('insert')" v-on:click="menuAction('insert');">
+        <i class="fas fa-fw fa-check"></i> {{ lang.contextMenu.insert }}
+      </li>
+      <li v-if="showMenuItem('select')" v-on:click="menuAction('select')">
+        <i class="fas fa-fw fa-check"></i> {{ lang.contextMenu.select }}
+      </li>
+      <li v-if="showMenuItem('download')" v-on:click="menuAction('download')">
+        <i class="fas fa-fw fa-download"></i> {{ lang.contextMenu.download }}
+      </li>
+    </ul>
+    <ul class="list-unstyled">
+      <template v-if="!props || (props && props.delete !== false)">
+        <li v-on:click="menuAction('copy')">
+          <i class="far fa-fw fa-copy"></i> {{ lang.contextMenu.copy }}
+        </li>
+      </template>
+      <template v-if="!props || (props && props.upload !== false)">
+        <li v-on:click="menuAction('cut')">
+          <i class="fas fa-fw fa-cut"></i> {{ lang.contextMenu.cut }}
+        </li>
+        <li v-if="showMenuItem('rename')" v-on:click="menuAction('rename')">
+          <i class="far fa-fw fa-edit"></i> {{ lang.contextMenu.rename }}
+        </li>
+        <li v-if="showMenuItem('paste')" v-on:click="menuAction('paste')">
+          <i class="far fa-fw fa-clipboard"></i> {{ lang.contextMenu.paste }}
+        </li>
+      </template>
+    </ul>
+    <template v-if="!props || (props && props.delete !== false)">
+      <ul class="list-unstyled">
+        <li class="text-danger" v-on:click="menuAction('delete')">
+          <i class="far fa-fw fa-trash-alt"></i> {{ lang.contextMenu.delete }}
+        </li>
+      </ul>
+    </template>
+    <ul class="list-unstyled" v-if="showMenuItem('properties')">
+      <li v-on:click="menuAction('properties')">
+        <i class="far fa-fw fa-list-alt"></i> {{ lang.contextMenu.properties }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -128,9 +105,12 @@ export default {
 
         // focus on menu
         this.$nextTick(() => {
-          this.$refs.contextMenu.focus();
-          // set menu params
-          this.setMenu(event.pageY, event.pageX);
+          const contextMenu = this.$refs.contextMenu;
+          if (contextMenu) {
+            contextMenu.focus();
+            // set menu params
+            this.setMenu(event.pageY, event.pageX);
+          }
         });
       }
     },
@@ -195,8 +175,7 @@ export default {
           break;
         case 'view':
           // view image
-          if (
-            !multiSelect &&
+          if (!multiSelect &&
             firstItemType === 'file' &&
             this.canView(this.selectedItems[0].extension)
           ) return true;
@@ -213,18 +192,20 @@ export default {
           // rename file or folder
           if (!multiSelect) return true;
           break;
-        case 'insert': {
-          // insert file or folder
-          let show = true;
-          this.selectedItems.map((item) => {
-            if (item.type === 'dir') {
-              show = false;
-            }
-            return show;
-          });
-          if (show) return true;
-          break;
-        } case 'properties':
+        case 'insert':
+          {
+            // insert file or folder
+            let show = true;
+            this.selectedItems.map((item) => {
+              if (item.type === 'dir') {
+                show = false;
+              }
+              return show;
+            });
+            if (show) return true;
+            break;
+          }
+        case 'properties':
           // show element properties
           if (!multiSelect) return true;
           break;
@@ -262,20 +243,21 @@ export default {
             show: true,
           });
           break;
-        case 'download': {
-          // download file
-          const tempLink = document.createElement('a');
-          tempLink.style.display = 'none';
-          tempLink.href = this.downloadLink();
-          tempLink.setAttribute('download', this.selectedItems[0].basename);
-          tempLink.setAttribute('target', '_blank');
-          document.body.appendChild(tempLink);
-          // click link
-          tempLink.click();
-          // remove link
-          document.body.removeChild(tempLink);
-          break;
-        }
+        case 'download':
+          {
+            // download file
+            const tempLink = document.createElement('a');
+            tempLink.style.display = 'none';
+            tempLink.href = this.downloadLink();
+            tempLink.setAttribute('download', this.selectedItems[0].basename);
+            tempLink.setAttribute('target', '_blank');
+            document.body.appendChild(tempLink);
+            // click link
+            tempLink.click();
+            // remove link
+            document.body.removeChild(tempLink);
+            break;
+          }
         case 'copy':
           // add selected items to the clipboard
           this.$store.dispatch('fm/toClipboard', 'copy');
@@ -343,32 +325,27 @@ export default {
 </script>
 
 <style lang="scss">
-    .fm-context-menu {
-        position: absolute;
-        z-index: 9997;
-        background-color: white;
-        box-shadow: 3px 2px 5px gray;
-        border-radius: 5px;
-
-        .list-unstyled {
-            margin-bottom: 0;
-            border-bottom: 1px solid rgba(0,0,0,.125);
-        }
-
-        ul > li {
-            padding: 0.4rem 1rem;
-        }
-
-        ul > li:not(.disabled) {
-            cursor: pointer;
-
-            &:hover {
-                background-color: #f8f9fa;
-            }
-
-            i {
-                padding-right: 2rem;
-            }
-        }
+.fm-context-menu {
+  position: absolute;
+  z-index: 9997;
+  background-color: white;
+  box-shadow: 3px 2px 5px gray;
+  border-radius: 5px;
+  .list-unstyled {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+  }
+  ul > li {
+    padding: 0.4rem 1rem;
+  }
+  ul > li:not(.disabled) {
+    cursor: pointer;
+    &:hover {
+      background-color: #f8f9fa;
     }
+    i {
+      padding-right: 2rem;
+    }
+  }
+}
 </style>
