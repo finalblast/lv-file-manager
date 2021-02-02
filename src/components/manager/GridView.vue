@@ -26,7 +26,7 @@
         <div class="fm-item-info">
           {{ `${file.filename}.${file.extension}` }}
           <br> {{ bytesToHuman(file.size) }}
-          <br> <small><b>{{ file.dimensions }}</b></small>
+          <br> <small><b>{{ file.width }}x{{ file.height }}</b></small>
         </div>
       </div>
     </div>

@@ -48,12 +48,15 @@ const postQueries = {
    * @param oldName
    * @returns {AxiosPromise<any>}
    */
-  rename(disk, newName, oldName) {
+  rename(disk, newName, oldName, path, name, oldBaseName) {
     return HTTP.post('rename',
       {
         disk,
         newName,
         oldName,
+        path,
+        name,
+        oldBaseName
       },
     );
   },
