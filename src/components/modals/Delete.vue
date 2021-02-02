@@ -77,6 +77,8 @@ export default {
       const items = this.selectedItems.map(item => ({
         path: item.path,
         type: item.type,
+        dir: item.dirname,
+        name: item.basename,
       }));
 
       this.$store.dispatch('fm/delete', items).then((response) => {
