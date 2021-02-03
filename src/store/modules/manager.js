@@ -38,6 +38,8 @@ const manager = {
 
       // view type - table or grid - (default - table)
       viewType: 'grid',
+
+      tag: []
     };
   },
   mutations,

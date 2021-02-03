@@ -41,6 +41,11 @@ export default {
       this.$store.dispatch(`fm/${this.manager}/selectDirectory`, { path, history: true });
     },
 
+    selectTag(tag) {
+      console.log(tag)
+      this.$store.dispatch(`fm/${this.manager}/selectTag`, { tag });
+    },
+
     // Level up directory
     levelUp() {
       // if this a not root directory

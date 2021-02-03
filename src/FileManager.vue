@@ -10,7 +10,7 @@
                 <left-manager class="col" manager="left"></left-manager>
             </template>
             <template v-else-if="windowsConfig === 2">
-                <folder-tree class="col-4 col-md-3 col-xl-2"></folder-tree>
+                <folder-tree manager="left" class="col-4 col-md-3 col-xl-2"></folder-tree>
                 <left-manager class="col-8 col-md-9 col-xl-10" manager="left"></left-manager>
             </template>
             <template v-else-if="windowsConfig === 3">
@@ -253,4 +253,3 @@ export default {
         padding-bottom: 0;
     }
 </style>
-

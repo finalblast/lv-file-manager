@@ -4,16 +4,22 @@
             <i class="far fa-hdd"></i> {{ selectedDisk }}
         </div>
         <branch v-bind:parent-id="0"></branch>
+        <tag v-bind:manager="manager"></tag>
     </div>
 </template>
 
 <script>
 import Branch from './Branch';
+import Tag from './../Tag';
 
 export default {
   name: 'FolderTree',
+  props: {
+    manager: { type: String, required: true },
+  },
   components: {
     branch: Branch,
+    tag: Tag
   },
   computed: {
     // Selected Disk

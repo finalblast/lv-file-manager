@@ -43,6 +43,24 @@ export default {
     });
   },
 
+  selectTag(context, { tag }) {
+    return GET.tag(
+      tag,
+    ).then((response) => {
+      // if the action was successful
+      if (response.data.result.status === 'success') {
+        // clean selected items
+        context.commit('resetSelected');
+
+        // reset sorting
+        context.commit('resetSortSettings');
+
+        // set content
+        context.commit('setDirectoryContent', response.data);
+      }
+    });
+  },
+
   /**
    * Refresh content in the selected directory
    * @param context
