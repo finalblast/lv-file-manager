@@ -26,7 +26,7 @@
         <div class="fm-item-info">
           {{ `${file.filename}.${file.extension}` }}
           <br> {{ bytesToHuman(file.size) }}
-          <br> <small><b>{{ file.dimensions }}</b></small>
+          <br> <small><b>{{ file.width }} x {{ file.height }}</b></small>
         </div>
       </div>
     </div>
@@ -51,14 +51,10 @@ export default {
     manager: { type: String, required: true },
   },
   watch: {
-    files() {
-      this.loadDimensions();
-    }
   },
   mounted() {
     /* eslint space-before-function-paren: ["error", "never"] */
     this.disk = this.selectedDisk || 'images';
-    this.loadDimensions();
   },
   beforeUpdate() {
     // if disk changed
@@ -80,29 +76,6 @@ export default {
       }
 
       return false;
-    },
-
-    /**
-     * Load dimensions
-     */
-    loadDimensions() {
-      this.isLoading = true;
-      const filesBuilder = new Promise((resolve) => {
-        console.log(this.files);
-        this.files.forEach(async(image, index) => {
-          const dimensions = await this.getFileDimension(this.disk, image);
-          this.files[index].dimensions = dimensions;
-          if (index === this.files.length - 1) {
-            resolve();
-          }
-        });
-      });
-      console.log(filesBuilder);
-
-      filesBuilder.then(() => {
-        this.isLoading = false;
-        console.log(this.isLoading);
-      });
     },
 
     /**

@@ -89,6 +89,9 @@ export default {
         type: this.selectedItem.type,
         newName,
         oldName: this.selectedItem.path,
+        path: this.selectedItem.dirname,
+        name: this.name,
+        oldBaseName: this.selectedItem.basename
       }).then(() => {
         // close modal window
         this.hideModal();

@@ -11,6 +11,7 @@
                 <li class="breadcrumb-item text-truncate"
                     v-for="(item, index) in breadcrumb"
                     v-bind:key="index"
+                    v-if="index > 0"
                     v-bind:class="[breadcrumb.length === index + 1 ? 'active' : '']"
                     v-on:click="selectDirectory(index)">
                     <span>{{ item }}</span>

@@ -340,11 +340,14 @@ export default {
    * @param oldName
    * @returns {Promise<T>}
    */
-  rename(context, { type, newName, oldName }) {
+  rename(context, { type, newName, oldName, path, name, oldBaseName }) {
     return POST.rename(
       context.getters.selectedDisk,
       newName,
       oldName,
+      path,
+      name,
+      oldBaseName
     ).then((response) => {
       // refresh content
       if (type === 'dir') {

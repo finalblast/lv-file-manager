@@ -51,28 +51,6 @@ export default {
     },
 
     /**
-     * get file dimensions
-     * @param disk
-     * @param file
-     * @returns {string}
-     */
-    async getFileDimension(disk, file) {
-      const url = `${location.protocol}//${location.hostname}/file-manager/preview?disk=${disk || 'images'}&path=${encodeURIComponent(file.path)}&v=${file.timestamp}`;
-      let dimensions = 'N/A x N/A';
-      const imageLoadPromise = new Promise((resolve) => {
-        const img = new Image();
-        img.onload = function onload() {
-          dimensions = `${this.width} x ${this.height}`;
-          resolve();
-        };
-        img.src = url;
-      });
-      await imageLoadPromise;
-
-      return dimensions;
-    },
-
-    /**
      * Mime type to icon
      * @param mime
      * @returns {*}
