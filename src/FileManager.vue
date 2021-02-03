@@ -27,6 +27,7 @@
             </template>
         </div>
         <info-block></info-block>
+
     </div>
 </template>
 

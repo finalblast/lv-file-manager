@@ -2,7 +2,7 @@
     <div class="row justify-content-between fm-info-block">
         <div class="col-auto">
             <span v-show="selectedCount">
-                {{ `${lang.info.selected} ${selectedCount}` }}
+                {{ `${lang.info.selected ? lang.info.selected : '' } ${selectedCount}` }}
                 {{ `${lang.info.selectedSize} ${selectedFilesSize}` }}
             </span>
             <span v-show="!selectedCount">

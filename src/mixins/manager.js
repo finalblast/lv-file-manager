@@ -31,6 +31,10 @@ export default {
     selectionType() {
       return this.$store.getters['fm/selectionType'];
     },
+
+    selectedTags() {
+      return this.$store.state.fm[this.manager].selectedTags;
+    }
   },
   methods: {
     /**
@@ -42,8 +46,20 @@ export default {
     },
 
     selectTag(tag) {
-      console.log(tag)
-      this.$store.dispatch(`fm/${this.manager}/selectTag`, { tag });
+      let tags = this.selectedTags;
+
+      if (tags.includes(tag)) {
+        tags.splice(tags.indexOf(tag), 1);
+      } else {
+        tags.push(tag);
+      }
+
+      if (tags.length) {
+        this.$store.dispatch(`fm/${this.manager}/selectTag`, { tags });
+      } else {
+        let path = this.selectedDirectory;
+        this.$store.dispatch(`fm/${this.manager}/selectDirectory`, { path, history: true });
+      }
     },
 
     // Level up directory
