@@ -52,5 +52,14 @@ export default {
    */
   selectionType(state) {
     return state.selectionType;
+  },
+
+  /**
+   * Get Selection Type
+   * @param state
+   * @returns {string}
+   */
+  existingTags(state) {
+    return state.existingTags;
   }
 };

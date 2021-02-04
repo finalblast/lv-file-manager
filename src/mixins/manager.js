@@ -30,6 +30,11 @@ export default {
     // selected files and folders
     selectionType() {
       return this.$store.getters['fm/selectionType'];
+    },
+
+    // selected files and folders
+    existingTags() {
+      return this.$store.getters['fm/existingTags'];
     }
   },
   methods: {
@@ -44,8 +49,6 @@ export default {
     selectTag() {
       let tags = this.tags;
 
-      console.log(tags)
-
       let selectedTags = [];
 
       for (let i = 0; i < tags.length; i++) {
@@ -53,8 +56,6 @@ export default {
           selectedTags.push(tags[i].name)
         }
       }
-
-      console.log(selectedTags)
 
       if (selectedTags.length) {
         this.$store.dispatch(`fm/${this.manager}/selectTag`, { selectedTags });

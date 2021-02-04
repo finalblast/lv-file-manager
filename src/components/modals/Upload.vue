@@ -69,6 +69,9 @@
                 <hr>
             </div>
             <div v-else><p>{{ lang.modal.upload.noSelected }}</p></div>
+            <div class="fm-upload-tag">
+              <tag-input :tags="tags"></tag-input>
+            </div>
             <div class="fm-upload-info">
                 <!-- Progress Bar -->
                 <div class="progress" v-show="countFiles">
@@ -97,9 +100,16 @@
 import modal from '../../mixins/modal';
 import helper from '../../mixins/helper';
 
+import TagInput from './../TagInput';
+
 export default {
   name: 'Upload',
   mixins: [modal, helper],
+
+  components: {
+    TagInput
+  },
+
   data() {
     return {
       // selected files
@@ -107,10 +117,11 @@ export default {
 
       // overwrite if exists
       overwrite: 0,
+
+      tags: []
     };
   },
   computed: {
-
     // Progress bar value - %
     progressBar() {
       return this.$store.state.fm.messages.actionProgress;
@@ -131,8 +142,6 @@ export default {
 
       return this.bytesToHuman(size);
     },
-
-
   },
   methods: {
     /**
@@ -152,6 +161,7 @@ export default {
 
     // Upload new files
     uploadFiles() {
+      console.log(this.tags)
       // if files exists
       if (this.countFiles) {
         // upload files

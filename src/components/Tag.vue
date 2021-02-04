@@ -5,14 +5,13 @@
 </template>
 
 <script>
-import helper from './../mixins/helper';
 import manager from './../mixins/manager';
 
 import GET from './../http/get-queries';
 
 export default {
   name: 'Tag',
-  mixins: [helper, manager],
+  mixins: [manager],
   props: {
     manager: { type: String, required: true },
   },
@@ -31,6 +30,7 @@ export default {
     getTags() {
       GET.tags().then((response) => {
         this.tags = response.data
+        this.$store.commit('fm/setExistingTags', this.tags);
       })
     },
 
