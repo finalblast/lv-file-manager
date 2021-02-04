@@ -168,6 +168,7 @@ export default {
         this.$store.dispatch('fm/upload', {
           files: this.newFiles,
           overwrite: this.overwrite,
+          tags: this.tags
         }).then((response) => {
           // if new directory created successfully
           if (response.data.result.status === 'success') {

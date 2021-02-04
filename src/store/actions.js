@@ -202,7 +202,7 @@ export default {
    * @param files
    * @param overwrite
    */
-  upload(context, { files, overwrite }) {
+  upload(context, { files, overwrite, tags }) {
     // create new form data
     const data = new FormData();
     // directory where files will be uploaded
@@ -216,6 +216,10 @@ export default {
 
     // upload settings
     data.append('overwrite', overwrite);
+
+    for (let i = 0; i < tags.length; i++) {
+      data.append('tags[]', tags[i]);
+    }
 
     // add file or files
     for (let i = 0; i < files.length; i += 1) {
