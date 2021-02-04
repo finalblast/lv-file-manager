@@ -44,6 +44,7 @@ const en = {
     view: 'View',
     zip: 'Compress',
     insert: 'Insert',
+    addTag: 'Add Tag'
   },
   info: {
     directories: 'Folders:',
@@ -97,6 +98,10 @@ const en = {
       fieldFeedback: 'Invalid name',
       fileExist: 'File exists',
       title: 'Rename',
+    },
+    addTag: {
+      title: 'Add Tag',
+      fieldName: 'Enter tags'
     },
     status: {
       noErrors: 'No errors!',

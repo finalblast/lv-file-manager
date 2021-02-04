@@ -75,6 +75,14 @@ const postQueries = {
       clipboard,
     });
   },
+
+  addTags(disk, selectedList, tags) {
+    return HTTP.post('addTags', {
+      disk,
+      selectedList,
+      tags,
+    });
+  }
 };
 
 export default postQueries;

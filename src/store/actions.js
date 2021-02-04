@@ -286,8 +286,18 @@ export default {
    * @param context
    * @param items
    */
-  getTags(context) {
+  getTags() {
     return GET.tags().then((response) => {
+      return response;
+    });
+  },
+
+  addTags(context, { selectedList, tags }) {
+    return POST.addTags(
+      context.getters.selectedDisk,
+      selectedList,
+      tags
+    ).then((response) => {
       return response;
     });
   },

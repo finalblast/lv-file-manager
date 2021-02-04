@@ -21,6 +21,7 @@ import Rename from './Rename';
 import Properties from './Properties';
 import Preview from './Preview';
 import About from './About';
+import AddTag from './AddTag';
 
 export default {
   name: 'Modal',
@@ -34,6 +35,7 @@ export default {
     Properties,
     Preview,
     About,
+    AddTag,
   },
   computed: {
     /**

@@ -50,6 +50,11 @@
         <i class="far fa-fw fa-list-alt"></i> {{ lang.contextMenu.properties }}
       </li>
     </ul>
+    <ul class="list-unstyled" v-if="showMenuItem('add-tags')">
+      <li v-on:click="menuAction('add-tags')">
+        <i class="fas fa-fw fa-tags"></i> {{ lang.contextMenu.addTag }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -209,6 +214,17 @@ export default {
           // show element properties
           if (!multiSelect) return true;
           break;
+        case 'add-tags':
+          // show element add tags
+          let show = false;
+          this.selectedItems.map((item) => {
+            console.log(item)
+            if (item.type === 'file') {
+              show = true;
+            }
+          });
+          return show;
+          break;
         default:
           return false;
       }
@@ -270,6 +286,13 @@ export default {
           // show selected modal
           this.$store.commit('fm/modal/setModalState', {
             modalName: 'Rename',
+            show: true,
+          });
+          break;
+        case 'add-tags':
+          // show selected modal
+          this.$store.commit('fm/modal/setModalState', {
+            modalName: 'AddTag',
             show: true,
           });
           break;
