@@ -47,13 +47,13 @@ export default {
     },
 
     selectTag() {
-      let tags = this.tags;
+      let tags = this.existingTags;
 
       let selectedTags = [];
 
-      for (let i = 0; i < tags.length; i++) {
-        if (tags[i].active) {
-          selectedTags.push(tags[i].name)
+      for (let i = 0; i < this.existingTags.length; i++) {
+        if (this.existingTags[i].active) {
+          selectedTags.push(this.existingTags[i].name)
         }
       }
 

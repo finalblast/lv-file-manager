@@ -1,6 +1,6 @@
 <template>
   <div class="fm-tag-list">
-    <span v-for="(tag, index) in tags" :key="index" v-on:click.prevent="selectTagState(tag.name, index)" class="badge badge-pill" :class="{ 'badge-info': tag.active }">{{ tag.name }}</span>
+    <span v-for="(tag, index) in existingTags" :key="index" v-on:click.prevent="selectTagState(tag.name, index)" class="badge badge-pill" :class="{ 'badge-info': tag.active }">{{ tag.name }}</span>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      tags: []
+      tags: this.existingTags
     };
   },
   computed: {
@@ -28,16 +28,15 @@ export default {
   },
   methods: {
     getTags() {
-      GET.tags().then((response) => {
-        this.tags = response.data
-        this.$store.commit('fm/setExistingTags', this.tags);
-      })
+      this.$store.dispatch('fm/getTags').then((response) => {
+        this.$store.commit('fm/setExistingTags', response.data);
+      });
     },
 
     selectTagState(tag, index) {
-      let tagInstance = this.tags[index]
+      let tagInstance = this.existingTags[index]
       tagInstance.active = !tagInstance.active
-      this.tags.splice(index, 1, tagInstance)
+      this.existingTags.splice(index, 1, tagInstance)
       this.selectTag()
     }
   },

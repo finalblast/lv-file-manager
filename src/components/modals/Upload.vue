@@ -161,7 +161,6 @@ export default {
 
     // Upload new files
     uploadFiles() {
-      console.log(this.tags)
       // if files exists
       if (this.countFiles) {
         // upload files
@@ -174,6 +173,9 @@ export default {
           if (response.data.result.status === 'success') {
             // close modal window
             this.hideModal();
+            this.$store.dispatch('fm/getTags').then((response) => {
+              this.$store.commit('fm/setExistingTags', response.data);
+            });
           }
         });
       }

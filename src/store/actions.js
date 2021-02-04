@@ -282,6 +282,17 @@ export default {
   },
 
   /**
+   * Delete selected files and folders
+   * @param context
+   * @param items
+   */
+  getTags(context) {
+    return GET.tags().then((response) => {
+      return response;
+    });
+  },
+
+  /**
    * Add selected items to clipboard
    * @param context
    * @param type
