@@ -30,10 +30,6 @@ export default {
     // selected files and folders
     selectionType() {
       return this.$store.getters['fm/selectionType'];
-    },
-
-    selectedTags() {
-      return this.$store.state.fm[this.manager].selectedTags;
     }
   },
   methods: {
@@ -45,17 +41,23 @@ export default {
       this.$store.dispatch(`fm/${this.manager}/selectDirectory`, { path, history: true });
     },
 
-    selectTag(tag) {
-      let tags = this.selectedTags;
+    selectTag() {
+      let tags = this.tags;
 
-      if (tags.includes(tag)) {
-        tags.splice(tags.indexOf(tag), 1);
-      } else {
-        tags.push(tag);
+      console.log(tags)
+
+      let selectedTags = [];
+
+      for (let i = 0; i < tags.length; i++) {
+        if (tags[i].active) {
+          selectedTags.push(tags[i].name)
+        }
       }
 
-      if (tags.length) {
-        this.$store.dispatch(`fm/${this.manager}/selectTag`, { tags });
+      console.log(selectedTags)
+
+      if (selectedTags.length) {
+        this.$store.dispatch(`fm/${this.manager}/selectTag`, { selectedTags });
       } else {
         let path = this.selectedDirectory;
         this.$store.dispatch(`fm/${this.manager}/selectDirectory`, { path, history: true });

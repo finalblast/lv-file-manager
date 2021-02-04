@@ -43,9 +43,9 @@ export default {
     });
   },
 
-  selectTag(context, { tags }) {
+  selectTag(context, { selectedTags }) {
     return GET.tag(
-      tags,
+      selectedTags,
     ).then((response) => {
       // if the action was successful
       if (response.data.result.status === 'success') {

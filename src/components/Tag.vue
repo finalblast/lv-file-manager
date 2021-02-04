@@ -1,7 +1,7 @@
 <template>
-    <div class="fm-tag-list">
-        <span v-for="(tag, index) in tags" v-on:click.prevent="selectTagState(tag.name, index)" class="badge badge-pill" :class="tag.active ? 'badge-info' : 'badge-light'">{{ tag.name }}</span>
-    </div>
+  <div class="fm-tag-list">
+    <span v-for="(tag, index) in tags" :key="index" v-on:click.prevent="selectTagState(tag.name, index)" class="badge badge-pill" :class="{ 'badge-info': tag.active }">{{ tag.name }}</span>
+  </div>
 </template>
 
 <script>
@@ -35,8 +35,10 @@ export default {
     },
 
     selectTagState(tag, index) {
-      this.tags[index].active = !this.tags[index].active
-      this.selectTag(tag)
+      let tagInstance = this.tags[index]
+      tagInstance.active = !tagInstance.active
+      this.tags.splice(index, 1, tagInstance)
+      this.selectTag()
     }
   },
 };
