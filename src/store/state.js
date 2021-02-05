@@ -26,4 +26,6 @@ export default {
   navbarVisibility: true,
 
   selectionType: 'multiple',
+
+  existingTags: []
 };

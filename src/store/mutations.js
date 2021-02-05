@@ -83,4 +83,13 @@ export default {
   setSelectionType(state, type) {
     state.selectionType = type;
   },
+
+  /**
+   * To set selection type. Multiple Or Single
+   * @param state
+   * @param type
+   */
+  setExistingTags(state, tags) {
+    state.existingTags = tags;
+  },
 };

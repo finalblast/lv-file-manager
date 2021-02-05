@@ -24,7 +24,7 @@
           </template>
         </div>
         <div class="fm-item-info">
-          {{ `${file.filename}.${file.extension}` }}
+          {{ `${file.basename}` }}
           <br> {{ bytesToHuman(file.size) }}
           <br> <small><b>{{ file.width }} x {{ file.height }}</b></small>
         </div>

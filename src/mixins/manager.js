@@ -31,6 +31,11 @@ export default {
     selectionType() {
       return this.$store.getters['fm/selectionType'];
     },
+
+    // selected files and folders
+    existingTags() {
+      return this.$store.getters['fm/existingTags'];
+    }
   },
   methods: {
     /**
@@ -39,6 +44,25 @@ export default {
      */
     selectDirectory(path) {
       this.$store.dispatch(`fm/${this.manager}/selectDirectory`, { path, history: true });
+    },
+
+    selectTag() {
+      let tags = this.existingTags;
+
+      let selectedTags = [];
+
+      for (let i = 0; i < this.existingTags.length; i++) {
+        if (this.existingTags[i].active) {
+          selectedTags.push(this.existingTags[i].name)
+        }
+      }
+
+      if (selectedTags.length) {
+        this.$store.dispatch(`fm/${this.manager}/selectTag`, { selectedTags });
+      } else {
+        let path = this.selectedDirectory;
+        this.$store.dispatch(`fm/${this.manager}/selectDirectory`, { path, history: true });
+      }
     },
 
     // Level up directory

@@ -51,6 +51,28 @@ const getQueries = {
   },
 
   /**
+   * Get content (files and folders) by tag
+   * @param tag
+   * @returns {AxiosPromise<any>}
+   */
+  tag(tag) {
+    return HTTP.get('tag', {
+      params: {
+        tag
+      },
+    });
+  },
+
+  /**
+   * Get content (files and folders) by tag
+   * @param tag
+   * @returns {AxiosPromise<any>}
+   */
+  tags() {
+    return HTTP.get('tags');
+  },
+
+  /**
    * Item properties
    * @param disk
    * @param path

@@ -37,7 +37,7 @@ const manager = {
       historyPointer: 0,
 
       // view type - table or grid - (default - table)
-      viewType: 'grid',
+      viewType: 'grid'
     };
   },
   mutations,
