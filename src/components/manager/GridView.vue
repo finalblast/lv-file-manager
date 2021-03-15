@@ -26,7 +26,9 @@
         <div class="fm-item-info">
           {{ `${file.basename}` }}
           <br> {{ bytesToHuman(file.size) }}
-          <br> <small><b>{{ file.width }} x {{ file.height }}</b></small>
+          <div v-if="file.width">
+            <small><b>{{ file.width }} x {{ file.height }}</b></small>
+          </div>
         </div>
       </div>
     </div>
